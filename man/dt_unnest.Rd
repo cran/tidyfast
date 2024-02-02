@@ -4,14 +4,14 @@
 \alias{dt_unnest}
 \title{Unnest: Fast Unnesting of Data Tables}
 \usage{
-dt_unnest(dt_, col, ...)
+dt_unnest(dt_, col, keep = TRUE)
 }
 \arguments{
 \item{dt_}{the data table to unnest}
 
 \item{col}{the column to unnest}
 
-\item{...}{any of the other variables in the nested table that you want to keep in the unnested table. Bare variable names. If none are provided, all variables are kept.}
+\item{keep}{whether to keep the nested column, default is \code{TRUE}}
 }
 \description{
 Quickly unnest data tables, particularly those nested by \code{dt_nest()}.
@@ -23,9 +23,8 @@ dt <- data.table(
   x = rnorm(1e5),
   y = runif(1e5),
   grp = sample(1L:3L, 1e5, replace = TRUE)
-  )
+)
 
 nested <- dt_nest(dt, grp)
 dt_unnest(nested, col = data)
-
 }

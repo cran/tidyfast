@@ -13,6 +13,7 @@ dt_separate(
   fill = NA,
   fixed = TRUE,
   immutable = TRUE,
+  dev = FALSE,
   ...
 )
 }
@@ -33,6 +34,8 @@ dt_separate(
 
 \item{immutable}{If \code{TRUE}, \code{.dt} is treated as immutable (it will not be modified in place). Alternatively, you can set \code{immutable = FALSE} to modify the input object.}
 
+\item{dev}{If \code{TRUE}, the function can be used within other functions. It bypasses the usual non-standard evaluation. Default is \code{FALSE}.}
+
 \item{...}{arguments passed to \code{data.table::tstrplit()}}
 }
 \value{
@@ -44,8 +47,10 @@ Separates a column of data into others, by splitting based a separator or regula
 \examples{
 
 library(data.table)
-d <- data.table(x = c("A.B", "A", "B", "B.A"),
-                y = 1:4)
+d <- data.table(
+  x = c("A.B", "A", "B", "B.A"),
+  y = 1:4
+)
 
 # defaults
 dt_separate(d, x, c("c1", "c2"))
@@ -60,5 +65,4 @@ separated
 # don't need to assign when `immutable = FALSE` (default)
 dt_separate(d, x, c("c1", "c2"), immutable = FALSE)
 d
-
 }
